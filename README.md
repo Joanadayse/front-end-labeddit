@@ -11,11 +11,11 @@ O layout da aplicação está disponível no Figma:
   <img alt="Made by tgmarinho" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
 </a>
 
-##  ⚙️  Funcionalidades
-* <b>Funcionalidade 1</b>: Login 
-* <b>Funcionalidade 2</b>: Cadastro
-* <b>Funcionalidade 3</b>: Publicação de post 
-* <b>Funcionalidade 4</b>: Like e dislikes
+##  ⚙️  Funcionalidades do Front-end
+* <b>Funcionalidade 1</b>: Pagina de Login 
+* <b>Funcionalidade 2</b>: Pagina de Cadastro
+* <b>Funcionalidade 3</b>: Pagina de post 
+
 
 ## 🛠 Tecnologias utilizadas
 * [React](https://pt-br.reactjs.org/)

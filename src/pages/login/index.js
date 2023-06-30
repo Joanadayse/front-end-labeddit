@@ -1,26 +1,108 @@
-import logo from "./logo.png";
-import Line from "./line.png";
-import { ContainerLogin, Formulario, Input, Button, Logo, ImageLine } from "./styled";
+import { useForm } from "../../hooks/useForm";
+import logo from "../../assests/logo.png";
+import { Button } from "@chakra-ui/react";
+import { useState } from "react";
+import { validateEmail, validatePassword } from "../../constantes";
+import {
+  CenterPageContainer,
+  FormContainer,
+} from "../../components/styled-containers";
+import { EmailInput, PasswordInput } from "../../components";
+import { HeaderDiv } from "./styled";
+import { goToPostsPage, goToSignupPage } from "../../routes/coordinator";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../constantes";
 
 export const LoginPage = () => {
+  const [form, onChangeInputs, clearFields] = useForm({
+    email: "",
+    password: "",
+  });
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    // console.log("Login Realizado com sucesso!", form);
+    setIsEmailValid(validateEmail(form.email));
+    setIsPasswordValid(validatePassword(form.password));
+
+    // let response;
+    try {
+      const {token} =
+        setIsEmailValid &&
+        setIsPasswordValid &&
+        (await login({
+          email: form.email,
+          password: form.password,
+        }));
+      window.localStorage.setItem("user.token",token)
+       goToPostsPage(navigate)
+
+      // console.log(response);
+    } catch (e) {
+      alert(e.response.data.message)
+    }
+
+    clearFields();
+  };
+
   return (
-    <ContainerLogin>
-        <Logo src={logo} />   
-       <p>O projeto de rede social da Labenu</p>   
+    <CenterPageContainer>
+      <HeaderDiv>
+        <img src={logo} />
+        <p>O projeto de rede social da Labenu</p>
+      </HeaderDiv>
 
-      <Formulario>
-        <Input placeholder="E-mail" />
-        <Input placeholder="Senha" />
-      </Formulario>
+      <FormContainer onSubmit={onSubmit}>
+        <EmailInput
+          value={form.email}
+          onChange={onChangeInputs}
+          isValid={isEmailValid}
+        />
 
-      <div className="div-buton">
-      <Button>Continuar</Button>
-      <ImageLine src={Line}/>
-      <Button>Criar uma conta!</Button>
+        <PasswordInput
+          value={form.password}
+          onChange={onChangeInputs}
+          isValid={isPasswordValid}
+        />
 
-      </div>
-
-    
-    </ContainerLogin>
+        <Button
+          // onSubmit={Login}
+          p={6}
+          borderRadius="20px"
+          variant="form"
+          type="submit"
+          boxShadow={"lg"}
+          bg={"linear-gradient(90deg, #ff6489 0%, #f9b24e 100%)"}
+          color={"white"}
+          _hover={{
+            bg: "#A8BBC6",
+          }}
+          // onClick={()=>goToPostsPage(navigate)}
+        >
+          continuar
+        </Button>
+        <Button
+          borderColor="#FE7E02"
+          border="2px"
+          p={6}
+          borderRadius="20px"
+          variant="form"
+          type="submit"
+          boxShadow={"lg"}
+          bg={"white"}
+          color={"#FE7E02"}
+          _hover={{
+            bg: "#A8BBC6",
+          }}
+          onClick={() => goToSignupPage(navigate)}
+        >
+          criar conta
+        </Button>
+      </FormContainer>
+    </CenterPageContainer>
   );
 };

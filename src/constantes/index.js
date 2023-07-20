@@ -9,9 +9,17 @@ export const signup=async(body)=>{
    return data
 }
 
+export const listPosts= async()=>{
+  const {data}=await axios.get("http://localhost:3003/posts", {
+    headers:{
+      Authorization: localStorage.getItem("user.token")
+    }
+  })
+  return data
+}
+
+
 export const validateEmail= email =>/[a-zA-Z0-9]+@[a-z]{3}[.a-z]?/.test(email)
-// export const validateEmail= email =>/^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/.test(email)
 export const validatePassword= password =>/.{6,}/.test(password)
 export const validateName= name =>/.{2,}/.test(name)
 
-export const TOKEN_NAME = "labefy-token"

@@ -7,3 +7,6 @@ export const  goToSignupPage= (navigator)=>{
 export const  goToPostsPage= (navigator)=>{
     navigator("/posts");
 }
+export const  goToDetailsPage= (navigator, id)=>{
+    navigator(`/details/${id}`);
+}

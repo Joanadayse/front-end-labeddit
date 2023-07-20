@@ -1,49 +1,31 @@
 import { Icon } from "@chakra-ui/react"
 import { CaixaComentarios, DivIcons } from "../styled-containers"
 import { ArrowDownIcon, ArrowUpIcon, ChatIcon } from "@chakra-ui/icons"
-import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
-import { TOKEN_NAME } from "../../constantes";
+import { useNavigate } from "react-router-dom"
+import { goToDetailsPage } from "../../routes/coordinator"
+
 
 export const PostCard=(props)=>{
+ 
 const {posts} = props;
+const navigate= useNavigate()
 
-// const context = useContext(GlobalContext);
-// const { fetchPost } = context;
+const onClickCard=(id)=>{
+    console.log(id)
+    goToDetailsPage(navigate,id)
+}
 
-// const [isLoading, setIsLoading] = useState(false)
+// console.log(posts.creator.name)
 
-
-// const like = async () => {
-//     setIsLoading(true)
-
-//     try {
-//       const token = window.localStorage.getItem(TOKEN_NAME);
-
-//       const config = {
-//         headers: {
-//           Authorization: token
-//         }
-//       };
-
-//       const body = {
-//         like: true
-//       }
-
-//       await axios.put(BASE_URL + `/playlists/${playlist.id}/like`, body, config);
-
-//       setIsLoading(false)
-//       fetchPlaylists()
-//     } catch (error) {
-//       console.error(error?.response?.data);
-//       window.alert(error?.response?.data)
-//     }
-//   };
-
+// quando chega nessa pagina ele dar o seguinte erro:"Cannot read properties of undefined (reading 'creator')
+// TypeError: Cannot read properties of undefined (reading 'creator') , mas vai com o id do post"
     return(
-        <CaixaComentarios>
+        <CaixaComentarios onClick={()=>onClickCard(posts.creator.id)} >
+        {/* <CaixaComentarios onClick={()=>goToDetailsPage(navigate)} > */}
         <p>Enviado por:{posts.creator.name}</p>
+        {/* <p>Enviado por:</p> */}
         <p>{posts.content}</p>
+        {/* <p>comentario</p> */}
         <DivIcons>
         <Icon as={ArrowDownIcon} w={8} h={5} />
         <p>1,20</p>

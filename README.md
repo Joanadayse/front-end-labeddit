@@ -11,6 +11,12 @@ O layout da aplicação está disponível no Figma:
   <img alt="Made by tgmarinho" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
 </a>
 
+  
+## Links
+* [Repositorio Back-end ](https://github.com/Joanadayse/back-end-labeddit)
+* [Deploy](https://projeto-labeddit-jd.surge.sh)
+
+
 ##  ⚙️  Funcionalidades do Front-end
 * <b>Funcionalidade 1</b>: Pagina de Login 
 * <b>Funcionalidade 2</b>: Pagina de Cadastro

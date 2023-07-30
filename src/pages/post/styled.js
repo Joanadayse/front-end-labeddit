@@ -10,11 +10,12 @@ text-align: center;
 `
 
 export const DivPostar = styled.div`
+
 /* background-color: red; */
-display: flex;
-flex-direction: column;
-gap: 20px;
-align-items: center;
+width: 100%;
+text-align: center;
+gap: 80%;
+
 `
 
 export const DivLine = styled.div`

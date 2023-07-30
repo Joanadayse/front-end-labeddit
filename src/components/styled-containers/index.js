@@ -2,21 +2,20 @@ import styled from "styled-components";
 
 export const CenterPageContainer = styled.div`
   justify-content: baseline;
-  height:896px;
-  width: 414px;
+  height:926px;
+  max-height: 100vh;
+  width: 428px;
+  max-width: 100vw;
   margin: 0 auto;
-  background-color: azure;
+  /* background-color: azure; */
 
 `;
 
 export const FormContainer = styled.form`
 height: 70vh;
-/* min-width: 40vw;
-max-width: 95vw; */
 display: flex;
 flex-direction: column;
 justify-content: center;
-/* background-color: beige; */
 padding: 10%;
 gap: 30px;
 
@@ -46,8 +45,18 @@ transition: 0.5s;
 export const DivIcons= styled.div`
 /* background-color: blue; */
 display: flex;
-gap: 30px;
+/* justify-content: space-between; */
+gap: 20px;
+border-width: 2px;
+width: 50%;
+border-radius: 20px;
+align-items: center;
 cursor: pointer;
 margin-top: 30px;
+transition: 0.5s;
+:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
 
 `

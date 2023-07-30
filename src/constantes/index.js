@@ -10,12 +10,12 @@ export const signup=async(body)=>{
 }
 
 export const listPosts= async()=>{
-  const {data}=await axios.get("http://localhost:3003/posts", {
+  const {response}=await axios.get("http://localhost:3003/posts", {
     headers:{
       Authorization: localStorage.getItem("user.token")
     }
   })
-  return data
+  return response
 }
 
 

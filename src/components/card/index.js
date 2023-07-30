@@ -3,36 +3,74 @@ import { CaixaComentarios, DivIcons } from "../styled-containers"
 import { ArrowDownIcon, ArrowUpIcon, ChatIcon } from "@chakra-ui/icons"
 import { useNavigate } from "react-router-dom"
 import { goToDetailsPage } from "../../routes/coordinator"
+import axios from "axios"
 
 
-export const PostCard=(props)=>{
- 
-const {posts} = props;
+export const PostCard=({content,id,name,like,dislikes,pegarPosts})=>{
+
 const navigate= useNavigate()
 
-const onClickCard=(id)=>{
-    console.log(id)
-    goToDetailsPage(navigate,id)
-}
+const likePost = async (e,postId) => {
+    e.stopPropagation()
+    try {
+      const body = {
+        like: true,
+      };
+      await axios.put(`http://localhost:3003/posts/${postId}/like`, body, {
+        headers: {
+          Authorization: window.localStorage.getItem("user.token"),
+        },
+      });
+      pegarPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-// console.log(posts.creator.name)
+  const dislikePost = async (e,postId) => {
+    e.stopPropagation()
+    try {
+      const body = {
+        like: false,
+      };
+      await axios.put(`http://localhost:3003/posts/${postId}/like`, body, {
+        headers: {
+          Authorization: window.localStorage.getItem("user.token"),
+        },
+      });
+      pegarPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-// quando chega nessa pagina ele dar o seguinte erro:"Cannot read properties of undefined (reading 'creator')
-// TypeError: Cannot read properties of undefined (reading 'creator') , mas vai com o id do post"
     return(
-        <CaixaComentarios onClick={()=>onClickCard(posts.creator.id)} >
-        {/* <CaixaComentarios onClick={()=>goToDetailsPage(navigate)} > */}
-        <p>Enviado por:{posts.creator.name}</p>
-        {/* <p>Enviado por:</p> */}
-        <p>{posts.content}</p>
-        {/* <p>comentario</p> */}
+        <CaixaComentarios onClick={()=>goToDetailsPage(navigate,id)} >
+        
+        <p>Enviado por:{name}</p>
+        <p>{content}</p>
+
+    
         <DivIcons>
-        <Icon as={ArrowDownIcon} w={8} h={5} />
-        <p>1,20</p>
-        <Icon as={ArrowUpIcon} w={8} h={5}  />
-        <p>1,20</p>
+        <Icon
+         as={ArrowDownIcon}
+          w={8} h={5}
+        onClick={() => likePost(id)}
+          
+          />
+        
+        {like}
+        <Icon
+         as={ArrowUpIcon} 
+         w={8} 
+         h={5}  
+        onClick={() => dislikePost(id)}
+         /> 
         <Icon as={ChatIcon} w={5} h={5}  />
         </DivIcons>
+
+     
+    
     </CaixaComentarios>
     )
 }

@@ -2,7 +2,7 @@ import { FormControl, FormHelperText, Input } from "@chakra-ui/react"
 
 export const NameInput=({value,onChange,isValid})=>{
     return(
-        <FormControl>
+        <FormControl px={8}>
         <Input
             placeholder="Apelido"
             name="name"

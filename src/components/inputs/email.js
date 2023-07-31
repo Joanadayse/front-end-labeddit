@@ -8,13 +8,9 @@ import {
 
   export const EmailInput=({isValid,value,onChange})=>{
 
-    // const [input, setInput] = useState('')
-    // const handleInputChange = (e) => setInput(e.target.value)
-    // const isValid = input === ''
 
     return(
-        <FormControl isInvalid={!isValid} >
-        {/* // <FormControl > */}
+        <FormControl isInvalid={!isValid} px={8}>
         <Input
           placeholder="E-mail"
           name="email"

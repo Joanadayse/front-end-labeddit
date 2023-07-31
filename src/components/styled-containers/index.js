@@ -1,29 +1,32 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const CenterPageContainer = styled.div`
-  /* justify-content: baseline; */
-  /* height:926px; */
-  /* height:100vh; */
-  /* max-height: 70vh; */
-  /* width: 428px; */
-  width: 90%;
-  /* max-width: 70vw; */
   margin: 0 auto;
   display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  /* background-color: azure; */
+
+   
 
 `;
 
 export const FormContainer = styled.form`
-height: 90vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
-padding: 10%;
 gap: 20px;
+width: 428px;
+  min-height: 926px;
+  margin: 0 auto;
+  align-items: center;
+
+  p,span{
+      text-align: center;
+    }
+
+
+
 
 `;
 
@@ -43,6 +46,11 @@ transition: 0.5s;
   cursor: pointer;
 }
 
+p{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
 
 
 
@@ -56,7 +64,9 @@ width: 50%;
 border-radius: 20px;
 align-items: center;
 cursor: pointer;
-margin-top: 30px;
+margin-top: 20px;
+margin-left: 10px;
+
 transition: 0.5s;
 :hover{
   transform: scale(1.1);
@@ -64,3 +74,39 @@ transition: 0.5s;
 }
 
 `
+
+const clickAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+export const Buttonn = styled.button`
+  width: 350px;
+  font-family: "Noto Sans";
+  height: 56px;
+  border-radius: 27px;
+  padding: 13px 133px;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  background: linear-gradient(90deg, #ff6489 0%, #f9b24e 100%);
+  transition: background 300ms ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(90deg, #f9b24e 0%, #ff6489 100%);
+  }
+
+  &:active {
+    animation-name: ${clickAnimation};
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+  }
+`;

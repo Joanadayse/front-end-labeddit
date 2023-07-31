@@ -7,12 +7,20 @@ import { validateEmail, validatePassword } from "../../constantes";
 import {
   CenterPageContainer,
   FormContainer,
+  Buttonn
 } from "../../components/styled-containers";
-import { EmailInput, Header, PasswordInput } from "../../components";
-import { HeaderDiv, ImageLine } from "./styled";
+import { EmailInput, PasswordInput } from "../../components";
+import { HeaderDiv} from "./styled";
 import { goToPostsPage, goToSignupPage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../constantes";
+import { css } from "@emotion/react";
+import { BeatLoader } from "react-spinners";
+
+const override = css`
+  display: inline-block;
+  margin-left: 5px;
+`;
 
 export const LoginPage = () => {
   const [form, onChangeInputs, clearFields] = useForm({
@@ -21,16 +29,15 @@ export const LoginPage = () => {
   });
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    // console.log("Login Realizado com sucesso!", form);
     setIsEmailValid(validateEmail(form.email));
     setIsPasswordValid(validatePassword(form.password));
-
-    // let response;
+    setLoading(true)
     try {
       const {token} =
         setIsEmailValid &&
@@ -40,9 +47,9 @@ export const LoginPage = () => {
           password: form.password,
         }));
       window.localStorage.setItem("user.token",token)
-       goToPostsPage(navigate)
-
-      // console.log(response);
+       setTimeout(() => {
+        goToPostsPage(navigate)
+      }, 2000);
     } catch (e) {
       alert(e.response.data.message)
     }
@@ -70,22 +77,20 @@ export const LoginPage = () => {
           isValid={isPasswordValid}
         />
 
-        <Button
-          // onSubmit={Login}
-          p={6}
-          borderRadius="20px"
-          variant="form"
-          type="submit"
-          boxShadow={"lg"}
-          bg={"linear-gradient(90deg, #ff6489 0%, #f9b24e 100%)"}
-          color={"white"}
-          _hover={{
-            bg: "#A8BBC6",
-          }}
-          
-        >
-          continuar
-        </Button>
+<Buttonn>
+          {loading ? (
+            <>
+              <BeatLoader
+                css={override}
+                size={10}
+                color={"#ffffff"}
+                loading={loading}
+              />
+            </>
+          ) : (
+            <span>Continuar</span>
+          )}
+        </Buttonn>
 
        
         <img src={line} alt="line" />
@@ -93,6 +98,7 @@ export const LoginPage = () => {
         <Button
           borderColor="#FE7E02"
           border="2px"
+          w={80}
           p={6}
           borderRadius="20px"
           variant="form"

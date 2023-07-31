@@ -21,22 +21,21 @@ const [show, setShow] = useState(false);
 const handleClick = () => setShow(!show);
 
     return(
-        <FormControl  isInvalid={!isValid} >
-        <InputGroup size="md">
-          <Input
-          
+        <FormControl  isInvalid={!isValid} px={8}>
+        <InputGroup >
+          <Input        
             pr="4.5rem"
-            // type="password"
             type={show ? "text" : "password"}
             placeholder="Senha"
             name="password"
             value={value}
-            // autocomplete="on"
+            // pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
             onChange={onChange}
+            
           />
            {!isValid ? (
           <FormHelperText>
-            Senha no formato inválido!
+            Senha deve conter 8 caracteres sendo 1 letra maiuscula,1 letra minuscula,e numeros !
           </FormHelperText>
         ) :  undefined}
           <InputRightElement width="4.5rem">

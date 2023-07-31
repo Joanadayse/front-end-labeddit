@@ -1,5 +1,6 @@
 import { useForm } from "../../hooks/useForm";
 import logo from "../../assests/logo.png";
+import line from "../../assests/line.png";
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { validateEmail, validatePassword } from "../../constantes";
@@ -7,8 +8,8 @@ import {
   CenterPageContainer,
   FormContainer,
 } from "../../components/styled-containers";
-import { EmailInput, PasswordInput } from "../../components";
-import { HeaderDiv } from "./styled";
+import { EmailInput, Header, PasswordInput } from "../../components";
+import { HeaderDiv, ImageLine } from "./styled";
 import { goToPostsPage, goToSignupPage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../constantes";
@@ -81,10 +82,14 @@ export const LoginPage = () => {
           _hover={{
             bg: "#A8BBC6",
           }}
-          // onClick={()=>goToPostsPage(navigate)}
+          
         >
           continuar
         </Button>
+
+       
+        <img src={line} alt="line" />
+        
         <Button
           borderColor="#FE7E02"
           border="2px"

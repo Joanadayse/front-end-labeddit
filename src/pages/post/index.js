@@ -18,12 +18,12 @@ import { useForm } from "../../hooks/useForm";
 export const PostsPage = () => {
   const [postList, setPostList] = useState([]);
   const [post, setPost] = useState(0);
-  const [form, onChangeInputs] = useForm({ content: "" });
+  const [form, onChangeInputs, clearFields] = useForm({ content: "" });
   
 
   const pegarPosts = () => {
     axios
-      .get("http://localhost:3003/posts", {
+      .get("https://labeddit-jd.onrender.com/posts", {
         headers: { Authorization: localStorage.getItem("user.token") },
       })
       .then((response) => {
@@ -36,11 +36,12 @@ export const PostsPage = () => {
   const criarPosts = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3003/posts", form, {
+      .post("https://labeddit-jd.onrender.com/posts", form, {
         headers: { Authorization: localStorage.getItem("user.token") },
       })
       .then((response) => {
         setPost(post + 1);
+        clearFields()
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +52,7 @@ export const PostsPage = () => {
     pegarPosts();
   }, [post]);
 
-  console.log(postList);
+  // console.log(postList);
 
   return (
     <CenterPageContainer>
@@ -69,7 +70,7 @@ export const PostsPage = () => {
 
           <Button
           mt={5}
-            w={80}
+            w={60}
             p={6}
             borderRadius="20px"
             variant="form"

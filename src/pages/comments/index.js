@@ -15,14 +15,13 @@ import { useForm } from "../../hooks/useForm";
 
 export const DetailsPage = () => {
   const [comentario, setComentario] = useState([]);
-  const [post , setPost]=useState (0)
   const [ form, onChangeInputs ] = useForm({ content: "" });
   const params = useParams();
 
   useEffect(() => {
     const pegarPosts = () => {
       axios
-        .get("http://localhost:3003/posts", {
+        .get("https://labeddit-jd.onrender.com/posts", {
           headers: { Authorization: localStorage.getItem("user.token") },
         })
         .then((response) => {
@@ -55,19 +54,7 @@ export const DetailsPage = () => {
     },
   ];
 
-  const criarPost= (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:3003/posts", form, {
-        headers: { Authorization: localStorage.getItem("user.token") },
-      })
-      .then((response) => {
-        setPost(post + 1);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+ 
 
 
 
@@ -84,17 +71,15 @@ export const DetailsPage = () => {
             <DivIcons>
               <Icon
                 as={ArrowDownIcon}
-                w={8}
+                w={5}
                 h={5}
-                // onClick={() => likePost(id)}
               />
-              {comentario.likes || 0} - {comentario.dislikes || 0}
+              {comentario.likes || 0}  
               <Icon
                 as={ArrowUpIcon}
                 w={8}
                 h={5}
-                // onClick={() => dislikePost(id)}
-              />
+              />      
               <Icon as={ChatIcon} w={5} h={5} />
             </DivIcons>
           )}
@@ -102,7 +87,7 @@ export const DetailsPage = () => {
       </DivComentarios>
 
       <DivPostar>
-        <form onSubmit={criarPost}>
+        <form>
           <CaixaTexto
             placeholder="Escreva seu Post..."
             name="content"
@@ -112,9 +97,9 @@ export const DetailsPage = () => {
           />
 
           <Button
-          mt={5}
-            w={80}
-            p={6}
+          mt={3}
+            w={60}
+            p={5}
             borderRadius="20px"
             variant="form"
             type="submit"
@@ -125,7 +110,7 @@ export const DetailsPage = () => {
               bg: "#A8BBC6",
             }}
           >
-            Postar
+            adicionar comentario
           </Button>
         </form>
       </DivPostar>
@@ -141,15 +126,12 @@ export const DetailsPage = () => {
                 as={ArrowDownIcon}
                 w={8}
                 h={5}
-                // onClick={() => likePost(id)}
               />
-           
               {coment.likes}
               <Icon
                 as={ArrowUpIcon}
                 w={8}
                 h={5}
-                // onClick={() => dislikePost(id)}
               />
               <Icon as={ChatIcon} w={5} h={5} />
             </DivIcons>

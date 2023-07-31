@@ -20,7 +20,12 @@ export const Header = () => {
   const handButton=()=>{
     switch (location.pathname) {
       case "/signup":
-        return  <button onClick={() => goToLoginPage(navigate)}>login</button>
+        return (
+          <>
+           <img src={logo} />
+           <button onClick={() => goToLoginPage(navigate)}>login</button>
+          </>
+        )
         
     case "/":
       return  <button onClick={delogar}>logount</button>

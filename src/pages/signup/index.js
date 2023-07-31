@@ -14,7 +14,7 @@ import {
   validateName,
   validatePassword,
 } from "../../constantes";
-import { goToPostsPage } from "../../routes/coordinator";
+import { goToLoginPage, goToPostsPage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 
 export const SignupPage = () => {
@@ -30,13 +30,12 @@ const navigate= useNavigate()
   const [isNameValid, setIsNameValid] = useState(true);
 
   const onSubmit = async(event) => {
-    event.preventDefault();
-    console.log("Cadastro  Realizado com sucesso!", form);
+    event.preventDefault()
     setIsEmailValid(validateEmail(form.email));
     setIsPasswordValid(validatePassword(form.password));
     setIsNameValid(validateName(form.name));
    
-    // let response;
+   
     try {
       const {token} =
       setIsNameValid &&
@@ -49,7 +48,7 @@ const navigate= useNavigate()
         }));
       // console.log(response);
       localStorage.setItem("user.token",token)
-      goToPostsPage(navigate)
+      goToLoginPage(navigate)
     } catch (e) {
       alert(e.response.data.message)
     }
@@ -84,7 +83,6 @@ const navigate= useNavigate()
         </Checkbox>
 
         <Button
-          // onClick={cadastrar}
           p={6}
           borderRadius="20px"
           variant="form"

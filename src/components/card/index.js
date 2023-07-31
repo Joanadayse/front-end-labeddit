@@ -16,7 +16,7 @@ const likePost = async (e,postId) => {
       const body = {
         like: true,
       };
-      await axios.put(`http://localhost:3003/posts/${postId}/like`, body, {
+      await axios.put(`https://labeddit-jd.onrender.com/posts/${postId}/like`, body, {
         headers: {
           Authorization: window.localStorage.getItem("user.token"),
         },
@@ -33,7 +33,7 @@ const likePost = async (e,postId) => {
       const body = {
         like: false,
       };
-      await axios.put(`http://localhost:3003/posts/${postId}/like`, body, {
+      await axios.put(`https://labeddit-jd.onrender.com/posts/${postId}/like`, body, {
         headers: {
           Authorization: window.localStorage.getItem("user.token"),
         },

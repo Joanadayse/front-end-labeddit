@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const CenterPageContainer = styled.div`
   justify-content: baseline;
   height:926px;
-  max-height: 100vh;
+  max-height: 70vh;
   width: 428px;
-  max-width: 100vw;
+  max-width: 70vw;
   margin: 0 auto;
   /* background-color: azure; */
 
@@ -17,7 +17,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 padding: 10%;
-gap: 30px;
+gap: 20px;
 
 `;
 
@@ -43,9 +43,7 @@ transition: 0.5s;
 `
 
 export const DivIcons= styled.div`
-/* background-color: blue; */
 display: flex;
-/* justify-content: space-between; */
 gap: 20px;
 border-width: 2px;
 width: 50%;

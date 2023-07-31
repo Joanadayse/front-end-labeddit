@@ -1,16 +1,16 @@
 import axios from "axios"
 
 export const login= async(body)=>{
-  const {data}= await axios.post("http://localhost:3003/users/login",body)
+  const {data}= await axios.post("https://labeddit-jd.onrender.com/users/login",body)
   return data
 }
 export const signup=async(body)=>{
-   const {data}=await axios.post("http://localhost:3003/users/signup",body)
+   const {data}=await axios.post("https://labeddit-jd.onrender.com/users/signup",body)
    return data
 }
 
 export const listPosts= async()=>{
-  const {response}=await axios.get("http://localhost:3003/posts", {
+  const {response}=await axios.get("https://labeddit-jd.onrender.com/posts", {
     headers:{
       Authorization: localStorage.getItem("user.token")
     }

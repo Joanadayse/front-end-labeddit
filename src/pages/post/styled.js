@@ -12,9 +12,9 @@ text-align: center;
 export const DivPostar = styled.div`
 
 /* background-color: red; */
-width: 100%;
+/* width: 100%; */
 text-align: center;
-gap: 80%;
+/* gap: 80%; */
 
 `
 

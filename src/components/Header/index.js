@@ -27,8 +27,19 @@ export const Header = () => {
           </>
         )
         
-    case "/":
-      return  <button onClick={delogar}>logount</button>
+    case "/posts":
+      return (
+        <>
+        <img src={logo} />
+       <button onClick={delogar}>logount</button>
+      
+      
+
+     
+         
+         
+        </>
+      )
       default:
         return(
           <>

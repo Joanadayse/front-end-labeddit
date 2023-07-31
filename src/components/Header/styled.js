@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const DivHeader= styled.div`
-display: flex;
-justify-content:space-around;
-background-color: #A8BBC6;
-width: 428px; 
-height: 40px; 
-max-height: 70vh;
-max-width: 70vw;
-margin: 0 auto;
+
+
+
+width:428px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #EDEDED;
 
 
 img{
@@ -17,9 +18,9 @@ img{
 }
 
 button{
-    /* margin-right: 10px; */
     color: #4088CB;
     font-weight: bold;
+   
 }
 
 

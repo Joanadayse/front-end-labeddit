@@ -1,18 +1,24 @@
 import styled from "styled-components";
 
 export const CenterPageContainer = styled.div`
-  justify-content: baseline;
-  height:926px;
-  max-height: 70vh;
-  width: 428px;
-  max-width: 70vw;
+  /* justify-content: baseline; */
+  /* height:926px; */
+  /* height:100vh; */
+  /* max-height: 70vh; */
+  /* width: 428px; */
+  width: 90%;
+  /* max-width: 70vw; */
   margin: 0 auto;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   /* background-color: azure; */
 
 `;
 
 export const FormContainer = styled.form`
-height: 70vh;
+height: 90vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -23,7 +29,7 @@ gap: 20px;
 
 export const CaixaComentarios= styled.div`
 /* background-color: beige; */
-width: 90%;
+width: 40vh;
 height: 150px;
 margin: 0 auto;
 display: flex;

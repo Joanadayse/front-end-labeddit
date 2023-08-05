@@ -7,8 +7,6 @@ export const CenterPageContainer = styled.div`
     align-items: center;
     flex-direction: column;
 
-   
-
 `;
 
 export const FormContainer = styled.form`
@@ -17,13 +15,16 @@ flex-direction: column;
 justify-content: center;
 gap: 20px;
 width: 428px;
-  min-height: 926px;
+  min-height: 700px;
   margin: 0 auto;
   align-items: center;
+  /* background-color: red; */
 
   p,span{
       text-align: center;
     }
+
+
 
 
 

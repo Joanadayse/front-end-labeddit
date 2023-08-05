@@ -10,10 +10,10 @@ export  const useForm= (inicialState)=>{
      
      }
 
-     const clearFields=()=>{
+     const clearInputs=()=>{
       setForm(inicialState)
      }
   
-     return [form, onChangeInputs, clearFields]
+     return [form, onChangeInputs, clearInputs]
   
   }

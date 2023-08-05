@@ -51,7 +51,7 @@ const navigate= useNavigate()
         setIsEmailValid &&
         setIsPasswordValid &&
         (await signup({
-          name:form.name,
+          nickName:form.name,
           email: form.email,
           password: form.password,
         }));
@@ -84,11 +84,10 @@ const navigate= useNavigate()
         />
 
         <p className="paragrafo">
-          Ao continuar você concorda com o nosso
-          <span>Contrato de usuario</span> e nossa
-          <span>Politica de Privacidade</span>
+          Ao continuar você concorda com o nosso<span>Contrato de usuario</span>e nossa <span>Politica de Privacidade</span>
         </p>
-        <Checkbox px={7}>
+        
+        <Checkbox px={7} color={"black"}>
           Eu concordo em receber emails sobre coisas leais da LabeEddit{" "}
         </Checkbox>
 

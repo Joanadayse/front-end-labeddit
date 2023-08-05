@@ -1,119 +1,97 @@
-import { Button } from "@chakra-ui/react";
 import { Header } from "../../components/Header";
 import { PostCard } from "../../components/card";
 import { CenterPageContainer } from "../../components/styled-containers";
 import {
-  CaixaComentarios,
-  CaixaTexto,
   DivComentarios,
-  DivIcons,
-  DivLine,
-  DivPostar,
+  DivLine
 } from "./styled";
 import line from "../../assests/line.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useForm } from "../../hooks/useForm";
+import { BASE_URL } from "../../constantes";
+import { GlobalContext } from "../../context/GlobalContext";
+import { CreatePostCard } from "../../components/createPostCard/CreatePostCard";
+import { PostContext } from "../../context/PostContext";
 
 export const PostsPage = () => {
-  const [postList, setPostList] = useState([]);
-  const [post, setPost] = useState(0);
-  const [form, onChangeInputs, clearFields] = useForm({ content: "" });
-  
-
-  const pegarPosts = () => {
-    axios
-      .get("https://labeddit-jd.onrender.com/posts", {
-        headers: { Authorization: localStorage.getItem("user.token") },
-      })
-      .then((response) => {
-        setPostList(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const criarPosts = (event) => {
-    event.preventDefault();
-    axios
-      .post("https://labeddit-jd.onrender.com/posts", form, {
-        headers: { Authorization: localStorage.getItem("user.token") },
-      })
-      .then((response) => {
-        setPost(post + 1);
-        clearFields()
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const context = useContext(GlobalContext)
+  const { posts, fetchPosts } = context
 
   useEffect(() => {
-    pegarPosts();
-  }, [post]);
+    const token = window.localStorage.getItem("user.token")
+    if (token) {
+      fetchPosts()
+    }
+  }, [])
+  const [ liked, setLiked ] = useState(false)
+  const [ disliked, setDisLiked ] = useState(false)
+ 
+  
+  const handlePostLike = (id) => {
+      const body = {
+          like: true
+      }
+      likeDislikePost(id,body)
+      setLiked(!liked)
+      setDisLiked(disliked)
+    }
 
-  // console.log(postList);
+    const handlePostDislike = (id) => {
+      const body = {
+          like: false
+      }
+      likeDislikePost(id, body)
+      setDisLiked(!disliked)
+      setLiked(liked)
+      }
 
+    const likeDislikePost = async (id, body) => {
+      try {
+
+        const token = window.localStorage.getItem("user.token");
+
+        const config = {
+          headers: {
+            Authorization: token
+          }
+        }
+      
+        await axios.put(BASE_URL + `posts/${id}/like`, body, config)
+ 
+      } catch (error) {
+        console.error(error?.response)
+      }
+    }    
+  
+    useEffect(() => {
+      fetchPosts()
+     }, [ liked, disliked ])  
+    const postContext ={
+      handlePostLike,
+      handlePostDislike
+    }
+ 
+    
   return (
-    <CenterPageContainer>
+    <PostContext.Provider value={postContext}>
+      <CenterPageContainer>
       <Header />
-
-      <DivPostar>
-        <form onSubmit={criarPosts}>
-          <CaixaTexto
-            placeholder="Escreva seu Post..."
-            name="content"
-            value={form.content}
-            onChange={onChangeInputs}
-            required
-          />
-
-          <Button
-          mt={5}
-            w={60}
-            p={6}
-            borderRadius="20px"
-            variant="form"
-            type="submit"
-            boxShadow={"lg"}
-            bg={"linear-gradient(90deg, #ff6489 0%, #f9b24e 100%)"}
-            color={"white"}
-            _hover={{
-              bg: "#A8BBC6",
-            }}
-          >
-            Postar
-          </Button>
-        </form>
-      </DivPostar>
+      <CreatePostCard />
 
       <DivLine>
         <img src={line} />
       </DivLine>
 
       <DivComentarios>
-        {postList     
-          .sort((atual, proximo) => {
-              if (atual.likes < proximo.likes) {
-                  return 1;
-              } else if (atual.likes > proximo.likes) {
-                  return -1;
-              } else {
-                  return postList;
-              }
-          })
-        .map((post) => (
-        <PostCard
-        key={post.id} 
-        id={post.id}
-        content={post.content}
-        name={post.creator.name}
-        like={post.likes}
-        dislike={post.dislikes}
-        pegarPosts={pegarPosts}
+        {posts && posts.map((post)=>{
+          return <PostCard
+          key={post.id} post={post} handlePostLike={handlePostLike} handlePostDislike={handlePostDislike} liked={liked} disliked={disliked} 
         />
-        ))}
+        })  
+        }
       </DivComentarios>
     </CenterPageContainer>
+
+    </PostContext.Provider>
   );
 };
